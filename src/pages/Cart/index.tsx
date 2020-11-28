@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
-import FeatherIcon from 'react-native-vector-icons/Feather';
+import React, { useMemo } from 'react'
+import FeatherIcon from 'react-native-vector-icons/Feather'
 
-import { View } from 'react-native';
+import { View } from 'react-native'
 
 import {
   Container,
@@ -21,11 +21,11 @@ import {
   TotalProductsContainer,
   TotalProductsText,
   SubtotalValue,
-} from './styles';
+} from './styles'
 
-import { useCart } from '../../hooks/cart';
+import { useCart } from '../../hooks/cart'
 
-import formatValue from '../../utils/formatValue';
+import formatValue from '../../utils/formatValue'
 
 interface Product {
   id: string;
@@ -36,7 +36,7 @@ interface Product {
 }
 
 const Cart: React.FC = () => {
-  const { increment, decrement, products } = useCart();
+  const { increment, decrement, products } = useCart()
 
   function handleIncrement(id: string): void {
     // TODO
@@ -49,14 +49,15 @@ const Cart: React.FC = () => {
   const cartTotal = useMemo(() => {
     // TODO RETURN THE SUM OF THE QUANTITY OF THE PRODUCTS IN THE CART
 
-    return formatValue(0);
-  }, [products]);
+    return formatValue(0)
+  }, [products])
 
   const totalItensInCart = useMemo(() => {
-    // TODO RETURN THE SUM OF THE QUANTITY OF THE PRODUCTS IN THE CART
-
-    return 0;
-  }, [products]);
+    const total = products.reduce(function (preview, current) {
+      return preview + current.quantity
+    }, 0)
+    return total
+  }, [products])
 
   return (
     <Container>
@@ -111,7 +112,7 @@ const Cart: React.FC = () => {
         <SubtotalValue>{cartTotal}</SubtotalValue>
       </TotalProductsContainer>
     </Container>
-  );
-};
+  )
+}
 
-export default Cart;
+export default Cart
